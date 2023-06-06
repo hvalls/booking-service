@@ -6,18 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GetBookingCountProjection {
+public class BookingCountProjection {
 
     private final EventBus eventBus;
 
+    // TODO: This state goes to the database
+    private int bookingCount = 0;
+
     @Autowired
-    public GetBookingCountProjection(EventBus eventBus) {
+    public BookingCountProjection(EventBus eventBus) {
         this.eventBus = eventBus;
         this.eventBus.subscribe(BookingConfirmed.TOPIC, this::onBookingConfirmed);
     }
 
+    public int get() {
+        return bookingCount;
+    }
+
     private Void onBookingConfirmed(String jsonPayload) {
-        System.out.println("Booking confirmed! " + jsonPayload);
+        bookingCount++;
         return null;
     }
 
