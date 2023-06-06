@@ -24,6 +24,7 @@ public class BookingCountProjection {
     }
 
     private Void onBookingConfirmed(String jsonPayload) {
+        // TODO: Check duplicated events
         bookingCount++;
         return null;
     }

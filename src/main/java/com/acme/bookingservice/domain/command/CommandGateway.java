@@ -7,8 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommandGateway {
 
+    private final CreateBookingCommandHandler createBookingCommandHandler;
+
     @Autowired
-    CreateBookingCommandHandler createBookingCommandHandler;
+    public CommandGateway(CreateBookingCommandHandler createBookingCommandHandler) {
+        this.createBookingCommandHandler = createBookingCommandHandler;
+    }
 
     public void createBooking(String resourceId) {
         createBookingCommandHandler.handle(new CreateBookingCommand(resourceId));

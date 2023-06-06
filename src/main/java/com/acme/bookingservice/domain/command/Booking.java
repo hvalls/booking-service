@@ -12,4 +12,7 @@ public class Booking {
         this.resourceId = resourceId;
     }
 
+    public String getResourceId() {
+        return resourceId;
+    }
 }
