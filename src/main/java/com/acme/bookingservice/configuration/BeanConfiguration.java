@@ -1,6 +1,7 @@
 package com.acme.bookingservice.configuration;
 
-import com.acme.bookingservice.adapter.eventbus.EventBus;
+import com.acme.bookingservice.adapter.eventbus.InMemoryEventBus;
+import com.acme.bookingservice.domain.common.event.EventBus;
 import com.acme.bookingservice.domain.command.BookingRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +17,7 @@ public class BeanConfiguration {
 
     @Bean
     public EventBus eventBus() {
-        // TODO: Use in memory event bus
-        return () -> {};
+        return new InMemoryEventBus();
     }
 
 }

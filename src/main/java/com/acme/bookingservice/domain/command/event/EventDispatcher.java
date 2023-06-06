@@ -1,6 +1,7 @@
 package com.acme.bookingservice.domain.command.event;
 
-import com.acme.bookingservice.adapter.eventbus.EventBus;
+import com.acme.bookingservice.domain.common.event.BookingConfirmed;
+import com.acme.bookingservice.domain.common.event.EventBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +16,7 @@ public class EventDispatcher {
     }
 
     public void dispatch(BookingConfirmed ev) {
-        System.out.println("dispatching event..." + ev);
-        //TODO: Publish to event bus
+        eventBus.publish(ev.topic(), ev.jsonPayload());
     }
 
 }

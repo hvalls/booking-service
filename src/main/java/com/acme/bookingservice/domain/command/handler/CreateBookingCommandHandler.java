@@ -3,7 +3,7 @@ package com.acme.bookingservice.domain.command.handler;
 import com.acme.bookingservice.domain.command.BookingFactory;
 import com.acme.bookingservice.domain.command.BookingRepository;
 import com.acme.bookingservice.domain.command.CreateBookingCommand;
-import com.acme.bookingservice.domain.command.event.BookingConfirmed;
+import com.acme.bookingservice.domain.common.event.BookingConfirmed;
 import com.acme.bookingservice.domain.command.event.EventDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
