@@ -1,4 +1,6 @@
 package com.acme.bookingservice.domain.command;
 
-public record CreateBookingCommand(String resourceId) {
+import com.acme.bookingservice.domain.common.Id;
+
+public record CreateBookingCommand(Id resourceId) {
 }

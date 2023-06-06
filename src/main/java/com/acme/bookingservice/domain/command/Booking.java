@@ -5,14 +5,14 @@ import com.acme.bookingservice.domain.common.Id;
 public class Booking {
 
     public final Id id;
-    private final String resourceId;
+    private final Id resourceId;
 
-    public Booking(Id id, String resourceId) {
+    public Booking(Id id, Id resourceId) {
         this.id = id;
         this.resourceId = resourceId;
     }
 
-    public String getResourceId() {
+    public Id getResourceId() {
         return resourceId;
     }
 }

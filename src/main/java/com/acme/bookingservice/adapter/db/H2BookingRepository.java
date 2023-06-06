@@ -4,7 +4,7 @@ import com.acme.bookingservice.domain.command.Booking;
 import com.acme.bookingservice.domain.command.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class H2BookingRepository implements BookingRepository  {
+public class H2BookingRepository implements BookingRepository {
 
     private final JPABookingRepository repository;
 
@@ -15,7 +15,7 @@ public class H2BookingRepository implements BookingRepository  {
 
     @Override
     public void add(Booking booking) {
-        var jpaBooking = new JPABooking(booking.id.value(), booking.getResourceId());
+        var jpaBooking = new JPABooking(booking.id.value(), booking.getResourceId().value());
         repository.save(jpaBooking);
     }
 

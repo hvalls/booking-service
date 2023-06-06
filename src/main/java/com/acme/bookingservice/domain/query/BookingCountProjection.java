@@ -1,7 +1,6 @@
 package com.acme.bookingservice.domain.query;
 
 import com.acme.bookingservice.domain.common.event.BookingConfirmed;
-import com.acme.bookingservice.domain.common.event.EventBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,17 +10,15 @@ public class BookingCountProjection {
     private final DAO dao;
 
     @Autowired
-    public BookingCountProjection( DAO dao, EventBus eventBus) {
+    public BookingCountProjection(DAO dao) {
         this.dao = dao;
-        eventBus.subscribe(BookingConfirmed.TOPIC, this::onBookingConfirmed);
     }
 
     public int get() {
         return dao.getBookingCount();
     }
 
-    private Void onBookingConfirmed(String jsonPayload) {
-        // TODO: Check duplicated events
+    public Void project(BookingConfirmed bookingConfirmed) {
         dao.incrementBookingCount();
         return null;
     }

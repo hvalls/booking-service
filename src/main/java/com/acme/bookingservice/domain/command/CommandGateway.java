@@ -1,6 +1,7 @@
 package com.acme.bookingservice.domain.command;
 
 import com.acme.bookingservice.domain.command.handler.CreateBookingCommandHandler;
+import com.acme.bookingservice.domain.common.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,8 @@ public class CommandGateway {
     }
 
     public void createBooking(String resourceId) {
-        createBookingCommandHandler.handle(new CreateBookingCommand(resourceId));
+        var cmd = new CreateBookingCommand(new Id(resourceId));
+        createBookingCommandHandler.handle(cmd);
     }
 
 }

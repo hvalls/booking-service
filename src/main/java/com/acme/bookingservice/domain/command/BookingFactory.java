@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BookingFactory {
 
-    public Booking create(String resourceId) {
+    public Booking create(Id resourceId) {
         return new Booking(Id.random(), resourceId);
     }
 

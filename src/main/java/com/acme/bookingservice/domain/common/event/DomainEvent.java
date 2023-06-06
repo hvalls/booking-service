@@ -1,6 +1,10 @@
 package com.acme.bookingservice.domain.common.event;
 
-public interface Event {
+import com.acme.bookingservice.domain.common.Id;
+
+public interface DomainEvent {
+
+    Id eventId();
 
     String topic();
 

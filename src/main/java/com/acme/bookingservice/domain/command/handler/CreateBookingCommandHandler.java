@@ -3,8 +3,8 @@ package com.acme.bookingservice.domain.command.handler;
 import com.acme.bookingservice.domain.command.BookingFactory;
 import com.acme.bookingservice.domain.command.BookingRepository;
 import com.acme.bookingservice.domain.command.CreateBookingCommand;
-import com.acme.bookingservice.domain.common.event.BookingConfirmed;
 import com.acme.bookingservice.domain.command.event.EventDispatcher;
+import com.acme.bookingservice.domain.common.event.BookingConfirmed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,11 +27,11 @@ public class CreateBookingCommandHandler {
     }
 
     public void handle(CreateBookingCommand cmd) {
-        var resourceId = cmd.resourceId();
-        var booking = factory.create(resourceId);
+        var booking = factory.create(cmd.resourceId());
         repository.add(booking);
-        var event = new BookingConfirmed(booking.id.value(), resourceId, BookingConfirmed.EVENT_VERSION);
-        dispatcher.dispatch(event);
+        dispatcher.dispatch(
+                new BookingConfirmed(booking)
+        );
     }
 
 }
