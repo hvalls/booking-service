@@ -1,11 +1,15 @@
 package com.acme.bookingservice.domain.common.event;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public interface EventBus {
 
-    void publish(String topic, String jsonPayload);
+    void publish(String topic, String eventId, String jsonPayload);
 
-    void subscribe(String topic, Function<String, Void> fn);
+    /**
+     * @param topic
+     * @param fn    function with no return value and 2 arguments: eventId and jsonPayload
+     */
+    void subscribe(String topic, BiFunction<String, String, Void> fn);
 
 }

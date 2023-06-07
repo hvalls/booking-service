@@ -3,21 +3,31 @@ package com.acme.bookingservice.adapter.eventbus;
 import com.acme.bookingservice.domain.common.event.EventBus;
 
 import java.util.*;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public class InMemoryEventBus implements EventBus {
 
-    private final Map<String, List<Function<String, Void>>> subscribers = new HashMap<>();
+    private final Map<String, List<BiFunction<String, String, Void>>> subscribers = new HashMap<>();
+    private final ConsumedEventsCache consumedEvents = new ConsumedEventsCache();
 
     @Override
-    public void publish(String topic, String jsonPayload) {
+    public void publish(String topic, String eventId, String jsonPayload) {
         var eventSubscribers = subscribers.getOrDefault(topic, Collections.emptyList());
-        eventSubscribers.forEach(sub -> sub.apply(jsonPayload));
+        eventSubscribers.forEach(sub -> sub.apply(eventId, jsonPayload));
     }
 
     @Override
-    public void subscribe(String topic, Function<String, Void> fn) {
-        subscribers.computeIfAbsent(topic, m -> new LinkedList<>()).add(fn);
+    public void subscribe(String topic, BiFunction<String, String, Void> fn) {
+        subscribers.computeIfAbsent(topic, m -> new LinkedList<>())
+                .add((eventId, jsonPayload) -> processEvent(eventId, jsonPayload, fn));
+    }
+
+    private Void processEvent(String eventId, String jsonPayload, BiFunction<String, String, Void> fn) {
+        if (consumedEvents.isConsumed(eventId)) {
+            return null;
+        }
+        consumedEvents.markAsConsumed(eventId);
+        return fn.apply(eventId, jsonPayload);
     }
 
 }

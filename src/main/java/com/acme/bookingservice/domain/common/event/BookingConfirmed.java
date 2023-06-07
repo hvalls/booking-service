@@ -59,12 +59,14 @@ public class BookingConfirmed implements DomainEvent {
     public String jsonPayload() {
         return String.format("""
                           {
+                            "topic": "%s",
+                            "eventId": "%s",
                             "bookingId" : "%s",
                             "resourceId": "%s",
                             "eventVersion": %d
                           }
                         """,
-                bookingId, resourceId, eventVersion);
+                TOPIC, eventId, bookingId, resourceId, eventVersion);
     }
 
 }

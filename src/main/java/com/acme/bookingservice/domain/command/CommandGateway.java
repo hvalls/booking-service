@@ -15,9 +15,11 @@ public class CommandGateway {
         this.createBookingCommandHandler = createBookingCommandHandler;
     }
 
-    public void createBooking(String resourceId) {
-        var cmd = new CreateBookingCommand(new Id(resourceId));
-        createBookingCommandHandler.handle(cmd);
+    public Id createBooking(String resourceId) throws BookingAlreadyExistsException {
+        var bookingId = Id.random();
+        var resId = new Id(resourceId);
+        var cmd = new CreateBookingCommand(bookingId, resId);
+        return createBookingCommandHandler.handle(cmd);
     }
 
 }

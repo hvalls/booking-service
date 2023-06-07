@@ -2,5 +2,5 @@ package com.acme.bookingservice.domain.command;
 
 import com.acme.bookingservice.domain.common.Id;
 
-public record CreateBookingCommand(Id resourceId) {
+public record CreateBookingCommand(Id bookingId, Id resourceId) {
 }

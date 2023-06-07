@@ -8,10 +8,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class EventHandler {
 
+    private final BookingCountProjection bookingCountProjection;
+
     @Autowired
-    public EventHandler(EventBus eventBus, BookingCountProjection bookingCountProjection) {
-        eventBus.subscribe(BookingConfirmed.TOPIC, ev ->
-                bookingCountProjection.project(BookingConfirmed.fromJsonPayload(ev)));
+    public EventHandler(
+            BookingCountProjection bookingCountProjection,
+            EventBus eventBus
+    ) {
+        this.bookingCountProjection = bookingCountProjection;
+        eventBus.subscribe(BookingConfirmed.TOPIC, this::onBookingConfirmed);
+    }
+
+    private Void onBookingConfirmed(String eventId, String jsonPayload) {
+        var ev = BookingConfirmed.fromJsonPayload(jsonPayload);
+        return this.bookingCountProjection.project(ev);
     }
 
 }
