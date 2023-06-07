@@ -1,11 +1,12 @@
 package com.acme.bookingservice.adapter.eventbus;
 
-import com.acme.bookingservice.domain.common.event.EventBus;
+import com.acme.bookingservice.domain.command.EventPublisher;
+import com.acme.bookingservice.domain.query.EventSubscriber;
 
 import java.util.*;
 import java.util.function.BiFunction;
 
-public class InMemoryEventBus implements EventBus {
+public class InMemoryEventPublisherSubscriber implements EventPublisher, EventSubscriber {
 
     private final Map<String, List<BiFunction<String, String, Void>>> subscribers = new HashMap<>();
     private final ConsumedEventsCache consumedEvents = new ConsumedEventsCache();

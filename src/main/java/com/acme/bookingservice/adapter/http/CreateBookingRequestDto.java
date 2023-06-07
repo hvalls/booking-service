@@ -1,4 +1,4 @@
-package com.acme.bookingservice.adapter.http.dto;
+package com.acme.bookingservice.adapter.http;
 
 /**
  *

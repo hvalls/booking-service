@@ -1,7 +1,5 @@
-package com.acme.bookingservice.adapter.http.controller;
+package com.acme.bookingservice.adapter.http;
 
-import com.acme.bookingservice.adapter.http.dto.CreateBookingRequestDto;
-import com.acme.bookingservice.adapter.http.dto.GetBookingCountResponseDto;
 import com.acme.bookingservice.domain.command.BookingAlreadyExistsException;
 import com.acme.bookingservice.domain.command.CommandGateway;
 import com.acme.bookingservice.domain.query.QueryGateway;

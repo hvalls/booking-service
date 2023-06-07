@@ -1,12 +1,7 @@
-package com.acme.bookingservice.domain.command.handler;
+package com.acme.bookingservice.domain.command;
 
-import com.acme.bookingservice.domain.command.Booking;
-import com.acme.bookingservice.domain.command.BookingAlreadyExistsException;
-import com.acme.bookingservice.domain.command.BookingRepository;
-import com.acme.bookingservice.domain.command.CreateBookingCommand;
-import com.acme.bookingservice.domain.command.event.EventDispatcher;
 import com.acme.bookingservice.domain.common.Id;
-import com.acme.bookingservice.domain.common.event.BookingConfirmed;
+import com.acme.bookingservice.domain.common.BookingConfirmed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,15 +9,15 @@ import org.springframework.stereotype.Component;
 public class CreateBookingCommandHandler {
 
     private final BookingRepository repository;
-    private final EventDispatcher dispatcher;
+    private final EventPublisher publisher;
 
     @Autowired
     public CreateBookingCommandHandler(
             BookingRepository repository,
-            EventDispatcher dispatcher
+            EventPublisher publisher
     ) {
         this.repository = repository;
-        this.dispatcher = dispatcher;
+        this.publisher = publisher;
     }
 
     public Id handle(CreateBookingCommand cmd) throws BookingAlreadyExistsException {
@@ -32,10 +27,13 @@ public class CreateBookingCommandHandler {
         }
         var booking = new Booking(cmd.bookingId(), cmd.resourceId());
         repository.add(booking);
-        dispatcher.dispatch(
-                new BookingConfirmed(booking)
-        );
+        publishEvent(booking);
         return cmd.bookingId();
+    }
+
+    private void publishEvent(Booking booking) {
+        var ev = new BookingConfirmed(booking);
+        publisher.publish(ev.eventType(), ev.eventId().value(), ev.asJson());
     }
 
 }

@@ -1,10 +1,13 @@
-package com.acme.bookingservice.domain.common.event;
+package com.acme.bookingservice.domain.common;
 
 import com.acme.bookingservice.domain.command.Booking;
-import com.acme.bookingservice.domain.common.Id;
 
 public class BookingConfirmed implements DomainEvent {
 
+    /**
+     * In case of event payload structure changes, keeping track of the event version
+     * can be really useful for backwards compatibility
+     */
     public static final int EVENT_VERSION = 1;
 
     public static final String EVENT_TYPE = "booking.confirmed";
@@ -14,15 +17,6 @@ public class BookingConfirmed implements DomainEvent {
     private final Id resourceId;
     private final int eventVersion;
 
-    /**
-     * In case of event payload structure changes, keeping track of the event version
-     * can be really useful for backwards compatibility
-     */
-
-    public static BookingConfirmed fromJsonPayload(String jsonPayload) {
-        return null;
-    }
-
     public BookingConfirmed(Id eventId, Id bookingId, Id resourceId, int eventVersion) {
         this.eventId = eventId;
         this.bookingId = bookingId;
@@ -31,7 +25,7 @@ public class BookingConfirmed implements DomainEvent {
     }
 
     public BookingConfirmed(Booking booking) {
-        this(Id.random(), booking.id, booking.getResourceId(), EVENT_VERSION);
+        this(Id.random(), booking.id(), booking.resourceId(), EVENT_VERSION);
     }
 
     @Override
@@ -40,7 +34,7 @@ public class BookingConfirmed implements DomainEvent {
     }
 
     @Override
-    public String type() {
+    public String eventType() {
         return EVENT_TYPE;
     }
 
@@ -56,7 +50,7 @@ public class BookingConfirmed implements DomainEvent {
      * one more dependency to the project
      */
     @Override
-    public String jsonPayload() {
+    public String asJson() {
         return String.format("""
                           {
                             "eventType": "%s",

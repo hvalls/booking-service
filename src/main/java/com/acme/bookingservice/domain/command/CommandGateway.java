@@ -1,6 +1,5 @@
 package com.acme.bookingservice.domain.command;
 
-import com.acme.bookingservice.domain.command.handler.CreateBookingCommandHandler;
 import com.acme.bookingservice.domain.common.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,9 +15,7 @@ public class CommandGateway {
     }
 
     public Id createBooking(String resourceId) throws BookingAlreadyExistsException {
-        var bookingId = Id.random();
-        var resId = new Id(resourceId);
-        var cmd = new CreateBookingCommand(bookingId, resId);
+        var cmd = CreateBookingCommand.create(resourceId);
         return createBookingCommandHandler.handle(cmd);
     }
 

@@ -16,7 +16,7 @@ public class H2BookingRepository implements BookingRepository {
 
     @Override
     public void add(Booking booking) {
-        var jpaBooking = new JPABooking(booking.id.value(), booking.getResourceId().value());
+        var jpaBooking = new JPABooking(booking.id().value(), booking.resourceId().value());
         repository.save(jpaBooking);
     }
 

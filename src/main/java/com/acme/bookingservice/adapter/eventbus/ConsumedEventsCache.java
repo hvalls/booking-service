@@ -2,7 +2,6 @@ package com.acme.bookingservice.adapter.eventbus;
 
 import org.springframework.util.ConcurrentLruCache;
 
-
 /**
  * I decided to use an LRU cache for storing consumed events (IDs) and avoid duplicated.
  * Proper messaging systems (kafka, rabbitmq...) already implement this complex feature.
