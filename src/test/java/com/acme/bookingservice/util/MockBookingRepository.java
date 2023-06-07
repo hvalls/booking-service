@@ -1,4 +1,4 @@
-package com.acme.bookingservice;
+package com.acme.bookingservice.util;
 
 import com.acme.bookingservice.domain.command.Booking;
 import com.acme.bookingservice.domain.command.BookingRepository;

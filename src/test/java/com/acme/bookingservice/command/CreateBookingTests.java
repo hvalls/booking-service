@@ -1,9 +1,11 @@
-package com.acme.bookingservice;
+package com.acme.bookingservice.command;
 
 import com.acme.bookingservice.domain.command.BookingAlreadyExistsException;
 import com.acme.bookingservice.domain.command.CreateBookingCommand;
 import com.acme.bookingservice.domain.command.CreateBookingCommandHandler;
 import com.acme.bookingservice.domain.common.Id;
+import com.acme.bookingservice.util.MockBookingRepository;
+import com.acme.bookingservice.util.StubEventPublisher;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +21,7 @@ class CreateBookingTests {
         var bookingId = Id.random();
         var resourceId = Id.random();
         var cmd = new CreateBookingCommand(bookingId, resourceId);
-        CreateBookingCommandHandler handler = new CreateBookingCommandHandler(
+        var handler = new CreateBookingCommandHandler(
                 new MockBookingRepository(booking -> null, id -> true),
                 new StubEventPublisher()
         );
@@ -33,7 +35,7 @@ class CreateBookingTests {
         var resourceId = Id.random();
         var cmd = new CreateBookingCommand(bookingId, resourceId);
         var repository = new MockBookingRepository(booking -> null, id -> false);
-        CreateBookingCommandHandler handler = new CreateBookingCommandHandler(repository, new StubEventPublisher());
+        var handler = new CreateBookingCommandHandler(repository, new StubEventPublisher());
 
         handler.handle(cmd);
 
@@ -46,7 +48,7 @@ class CreateBookingTests {
         var resourceId = Id.random();
         var cmd = new CreateBookingCommand(bookingId, resourceId);
         var eventPublisher = new StubEventPublisher();
-        CreateBookingCommandHandler handler = new CreateBookingCommandHandler(
+        var handler = new CreateBookingCommandHandler(
                 new MockBookingRepository(booking -> null, id -> false),
                 eventPublisher
         );
@@ -61,7 +63,7 @@ class CreateBookingTests {
         var bookingId = Id.random();
         var resourceId = Id.random();
         var cmd = new CreateBookingCommand(bookingId, resourceId);
-        CreateBookingCommandHandler handler = new CreateBookingCommandHandler(
+        var handler = new CreateBookingCommandHandler(
                 new MockBookingRepository(booking -> null, id -> false),
                 new StubEventPublisher()
         );
