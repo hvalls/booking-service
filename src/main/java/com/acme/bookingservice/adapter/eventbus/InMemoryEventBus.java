@@ -11,14 +11,14 @@ public class InMemoryEventBus implements EventBus {
     private final ConsumedEventsCache consumedEvents = new ConsumedEventsCache();
 
     @Override
-    public void publish(String topic, String eventId, String jsonPayload) {
-        var eventSubscribers = subscribers.getOrDefault(topic, Collections.emptyList());
+    public void publish(String eventType, String eventId, String jsonPayload) {
+        var eventSubscribers = subscribers.getOrDefault(eventType, Collections.emptyList());
         eventSubscribers.forEach(sub -> sub.apply(eventId, jsonPayload));
     }
 
     @Override
-    public void subscribe(String topic, BiFunction<String, String, Void> fn) {
-        subscribers.computeIfAbsent(topic, m -> new LinkedList<>())
+    public void subscribe(String eventType, BiFunction<String, String, Void> fn) {
+        subscribers.computeIfAbsent(eventType, m -> new LinkedList<>())
                 .add((eventId, jsonPayload) -> processEvent(eventId, jsonPayload, fn));
     }
 

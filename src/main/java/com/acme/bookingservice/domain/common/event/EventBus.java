@@ -4,12 +4,12 @@ import java.util.function.BiFunction;
 
 public interface EventBus {
 
-    void publish(String topic, String eventId, String jsonPayload);
+    void publish(String eventType, String eventId, String jsonPayload);
 
     /**
-     * @param topic
+     * @param eventType
      * @param fn    function with no return value and 2 arguments: eventId and jsonPayload
      */
-    void subscribe(String topic, BiFunction<String, String, Void> fn);
+    void subscribe(String eventType, BiFunction<String, String, Void> fn);
 
 }

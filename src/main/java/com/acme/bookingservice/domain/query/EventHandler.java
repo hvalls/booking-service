@@ -16,7 +16,7 @@ public class EventHandler {
             EventBus eventBus
     ) {
         this.bookingCountProjection = bookingCountProjection;
-        eventBus.subscribe(BookingConfirmed.TOPIC, this::onBookingConfirmed);
+        eventBus.subscribe(BookingConfirmed.EVENT_TYPE, this::onBookingConfirmed);
     }
 
     private Void onBookingConfirmed(String eventId, String jsonPayload) {

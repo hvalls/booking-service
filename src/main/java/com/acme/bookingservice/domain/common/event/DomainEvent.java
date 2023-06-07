@@ -6,7 +6,7 @@ public interface DomainEvent {
 
     Id eventId();
 
-    String topic();
+    String type();
 
     String jsonPayload();
 

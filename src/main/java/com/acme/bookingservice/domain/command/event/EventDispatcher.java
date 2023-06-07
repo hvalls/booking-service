@@ -16,7 +16,7 @@ public class EventDispatcher {
     }
 
     public void dispatch(BookingConfirmed ev) {
-        eventBus.publish(ev.topic(), ev.eventId().value(), ev.jsonPayload());
+        eventBus.publish(ev.type(), ev.eventId().value(), ev.jsonPayload());
     }
 
 }

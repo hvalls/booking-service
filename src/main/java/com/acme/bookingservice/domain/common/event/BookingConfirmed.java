@@ -7,7 +7,7 @@ public class BookingConfirmed implements DomainEvent {
 
     public static final int EVENT_VERSION = 1;
 
-    public static final String TOPIC = "booking.confirmed";
+    public static final String EVENT_TYPE = "booking.confirmed";
 
     private final Id eventId;
     private final Id bookingId;
@@ -40,8 +40,8 @@ public class BookingConfirmed implements DomainEvent {
     }
 
     @Override
-    public String topic() {
-        return TOPIC;
+    public String type() {
+        return EVENT_TYPE;
     }
 
     /**
@@ -59,14 +59,14 @@ public class BookingConfirmed implements DomainEvent {
     public String jsonPayload() {
         return String.format("""
                           {
-                            "topic": "%s",
+                            "eventType": "%s",
                             "eventId": "%s",
                             "bookingId" : "%s",
                             "resourceId": "%s",
                             "eventVersion": %d
                           }
                         """,
-                TOPIC, eventId, bookingId, resourceId, eventVersion);
+                EVENT_TYPE, eventId, bookingId, resourceId, eventVersion);
     }
 
 }
