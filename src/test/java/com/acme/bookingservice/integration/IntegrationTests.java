@@ -1,6 +1,6 @@
 package com.acme.bookingservice.integration;
 
-import com.acme.bookingservice.adapter.eventbus.InMemoryEventPublisherSubscriber;
+import com.acme.bookingservice.adapter.event.InMemoryEventPublisherSubscriber;
 import com.acme.bookingservice.domain.command.BookingAlreadyExistsException;
 import com.acme.bookingservice.domain.command.CreateBookingCommand;
 import com.acme.bookingservice.domain.command.CreateBookingCommandHandler;

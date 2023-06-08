@@ -1,6 +1,6 @@
 package com.acme.bookingservice.query;
 
-import com.acme.bookingservice.adapter.eventbus.InMemoryEventPublisherSubscriber;
+import com.acme.bookingservice.adapter.event.InMemoryEventPublisherSubscriber;
 import com.acme.bookingservice.domain.query.BookingCountProjection;
 import com.acme.bookingservice.util.MockDao;
 import org.junit.jupiter.api.Test;

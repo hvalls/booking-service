@@ -1,4 +1,4 @@
-package com.acme.bookingservice.adapter.eventbus;
+package com.acme.bookingservice.adapter.event;
 
 import com.acme.bookingservice.domain.command.EventPublisher;
 import com.acme.bookingservice.domain.query.EventSubscriber;

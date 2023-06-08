@@ -1,4 +1,4 @@
-package com.acme.bookingservice.adapter.eventbus;
+package com.acme.bookingservice.adapter.event;
 
 import org.springframework.util.ConcurrentLruCache;
 

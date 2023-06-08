@@ -3,7 +3,7 @@ package com.acme.bookingservice;
 import com.acme.bookingservice.adapter.db.H2BookingRepository;
 import com.acme.bookingservice.adapter.db.H2DAO;
 import com.acme.bookingservice.adapter.db.JPABookingRepository;
-import com.acme.bookingservice.adapter.eventbus.InMemoryEventPublisherSubscriber;
+import com.acme.bookingservice.adapter.event.InMemoryEventPublisherSubscriber;
 import com.acme.bookingservice.domain.command.BookingRepository;
 import com.acme.bookingservice.domain.query.DAO;
 import jakarta.persistence.EntityManager;

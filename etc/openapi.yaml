@@ -1,0 +1,39 @@
+openapi: 3.0.3
+info:
+  title: Booking Service
+  contact:
+    email: hvalls198@gmail.com
+  version: 1.0.0
+paths:
+  /bookings:
+    post:
+      summary: Create a new booking
+      tags:
+        - Bookings
+      operationId: createBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                resourceId:
+                  type: string
+        required: true
+      responses:
+        201:
+          description: Booking created
+  /bookings/count:
+    get:
+      summary: Get bookings count
+      tags:
+        - Bookings
+      operationId: getBookingCount
+      responses:
+        200:
+          description: Bookings count
+          content:
+            application/json:
+              schema:
+                properties:
+                  count: 
+                    type: number
