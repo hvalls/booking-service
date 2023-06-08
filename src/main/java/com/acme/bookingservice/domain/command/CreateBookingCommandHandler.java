@@ -21,10 +21,10 @@ public class CreateBookingCommandHandler {
     }
 
     public Id handle(CreateBookingCommand cmd) throws BookingAlreadyExistsException {
-        // In case of more complex Booking instance creation, a factory could be used
         if (repository.exists(cmd.bookingId())) {
             throw new BookingAlreadyExistsException();
         }
+        // In case of more complex Booking instance creation, a factory could be used
         var booking = new Booking(cmd.bookingId(), cmd.resourceId());
         repository.add(booking);
         publishEvent(booking);

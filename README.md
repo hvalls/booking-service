@@ -26,7 +26,7 @@ Copy and paste the [OpenAPI file](etc/openapi.yaml) to https://editor.swagger.io
 ### Run
 
 ```bash
-$ ./graadlew bootRun
+$ ./gradlew bootRun
 ```
 
 ### Run with Docker
@@ -43,7 +43,6 @@ $ docker run -it -p 8080:8080 booking-service
 ```bash
 # Create booking
 $ curl -X POST http://localhost:8080/bookings -H 'Content-Type: application/json' -d '{"resourceId": "1234"}'
-
 # Get booking count
 $ curl http://localhost:8080/bookings/count
 {"count": 1} 
