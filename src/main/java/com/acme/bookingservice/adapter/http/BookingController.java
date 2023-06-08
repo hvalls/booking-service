@@ -30,7 +30,7 @@ public class BookingController {
             return ResponseEntity.created(
                     URI.create(String.format("/bookings/%s", bookingId.value()))).build();
         } catch (BookingAlreadyExistsException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
